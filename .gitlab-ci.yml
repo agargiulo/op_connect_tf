@@ -1,0 +1,15 @@
+default:
+  tags:
+    - agarg-public-projects
+
+stages:
+  - test
+
+terraform_latest_fmt_check:
+  stage: test
+  image:
+    name: hashicorp/terraform:light
+    entrypoint: [ "" ]
+  script:
+    - terraform --version
+    - terraform fmt -diff -check
