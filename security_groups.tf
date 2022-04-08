@@ -29,11 +29,10 @@ resource "aws_security_group_rule" "op_conn_fargate_ingress_from_lb" {
   description              = "ingress from the public ALB"
   security_group_id        = aws_security_group.op_conn_fargate.id
   source_security_group_id = aws_security_group.op_conn_alb.id
-  protocol                 = "TCP"
-  # TODO: START HERE if issues with connectivity
-  to_port   = local.op_conn_api_host_port
-  from_port = local.op_conn_api_host_port
-  type      = "ingress"
+  protocol                 = -1
+  to_port                  = 0
+  from_port                = 0
+  type                     = "ingress"
 }
 resource "aws_security_group_rule" "op_conn_fargate_ingress_from_self" {
   description       = "Ingress from other containers in the same security group"
@@ -46,7 +45,7 @@ resource "aws_security_group_rule" "op_conn_fargate_ingress_from_self" {
 }
 resource "aws_security_group_rule" "op_conn_egress" {
   from_port         = 0
-  protocol          = "TCP"
+  protocol          = -1
   security_group_id = aws_security_group.op_conn_fargate.id
   to_port           = 0
   cidr_blocks       = ["0.0.0.0/0"]
