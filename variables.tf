@@ -1,11 +1,11 @@
 variable "prefix" {
   description = "Prefix for various resource names"
-  default = "op-conn"
+  default     = "op-conn"
 }
 
 variable "op_creds_base64" {
   description = "Base64 encoded 1password-credentials.json file"
-  type = string
+  type        = string
 }
 
 variable "op_networking" {
